@@ -1,4 +1,4 @@
-# OasisTrack: Food Desert Inventory Management System
+# OasisTrack: Food Inventory Management System
 
 OasisTrack is a comprehensive solution designed to address the challenges of food deserts by efficiently managing inventory and deliveries for stores in underserved areas. This system caters to both drivers and administrators, providing tools for route management, inventory tracking, and data analysis.
 
