@@ -376,3 +376,11 @@ FodyWeavers.xsd
 */.idea/
 *.sln.iml
 .DS_Store
+
+# Ignore obj directories
+**/obj/
+
+# Ignore specific files
+*.AssemblyInfo.cs
+*.AssemblyInfoInputs.cache
+rider.project.model.nuget.info
