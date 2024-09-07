@@ -5,7 +5,7 @@ namespace OasisTrack.Core.Interfaces;
 
 public interface IStoreRepository
 {
-    Task<Store> AddAsync(Store store);
+    Task AddAsync(Store store);
     Task UpdateAsync(Store store);
     Task<IEnumerable<Store>> GetAllAsync();
     Task<Store> GetByIdAsync(int id);

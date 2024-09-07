@@ -17,14 +17,13 @@ public class StoreRepository : IStoreRepository
         _logger = logger;
     }
 
-    public async Task<Store> AddAsync(Store store)
+    public async Task AddAsync(Store store)
     {
         try
         {
             ArgumentNullException.ThrowIfNull(store);
             await _appDbContext.Stores.AddAsync(store);
             await _appDbContext.SaveChangesAsync();
-            return store;
         }
         catch (DbUpdateException ex)
         {
@@ -33,9 +32,19 @@ public class StoreRepository : IStoreRepository
         }
     }
 
-    public Task UpdateAsync(Store store)
+    public async Task UpdateAsync(Store store)
     {
-        throw new NotImplementedException();
+        try
+        {
+            ArgumentNullException.ThrowIfNull(store);
+            _appDbContext.Stores.Update(store);
+            await _appDbContext.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            _logger.LogError(ex, "An error occurred while adding a new store.");
+            throw;
+        }
     }
 
     public async Task<IEnumerable<Store>> GetAllAsync()
@@ -56,18 +65,29 @@ public class StoreRepository : IStoreRepository
         return store;
     }
 
-    public Task<bool> ExistsAsync(int id)
+    public async Task<bool> ExistsAsync(int id)
     {
-        throw new NotImplementedException();
+        return await _appDbContext.Stores.AnyAsync(f => f.Id == id);
     }
 
-    public Task<IEnumerable<Store>> GetByRouteIdAsync(int routeId)
+    public async Task<IEnumerable<Store>> GetByRouteIdAsync(int routeId)
     {
-        throw new NotImplementedException();
+        try
+        {
+            ArgumentNullException.ThrowIfNull(routeId);
+            return await _appDbContext.Stores
+                .Where(s => s.RouteId == routeId)
+                .ToListAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"An error occurred while retrieving stores for route ID {routeId}.");
+            throw;
+        }
     }
 
-    public Task<int> GetCountAsync()
+    public async Task<int> GetCountAsync()
     {
-        throw new NotImplementedException();
+        return await _appDbContext.Stores.CountAsync();
     }
 }
