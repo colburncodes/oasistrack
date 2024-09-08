@@ -12,6 +12,7 @@ public class StoreDto
     public string ZipCode { get; set; }
     public string PhoneNumber { get; set; }
     public bool isActive { get; set; }
+    public string ManagerName { get; set; }
     public int? RouteId { get; set; }
 
     public StoreDto(Core.Entities.Store store)
@@ -25,5 +26,6 @@ public class StoreDto
         PhoneNumber = store.PhoneNumber;
         isActive = store.IsActive;
         RouteId = store.RouteId;
+        ManagerName = store.ManagerName;
     }
 }

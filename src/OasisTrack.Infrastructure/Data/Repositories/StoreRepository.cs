@@ -21,6 +21,13 @@ public class StoreRepository : IStoreRepository
     {
         try
         {
+            // Check if the Route exists
+            var routeExists = await _appDbContext.Routes.AnyAsync(r => r.Id == store.RouteId);
+            if (!routeExists)
+            {
+                _logger.LogError($"Route with Id {store.RouteId} does not exist.");
+            }
+            
             ArgumentNullException.ThrowIfNull(store);
             await _appDbContext.Stores.AddAsync(store);
             await _appDbContext.SaveChangesAsync();
