@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using OasisTrack.Application.Services;
+using OasisTrack.Core.Interfaces;
 using OasisTrack.Infrastructure.Data;
+using OasisTrack.Infrastructure.Data.Repositories;
 using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -29,8 +32,16 @@ builder.Services.AddSwaggerGen(doc =>
     doc.SwaggerDoc("v1", new OpenApiInfo());
 });
 
+// Register the repository
+builder.Services.AddScoped<IStoreRepository, StoreRepository>();
+    
+// Register the service
+builder.Services.AddScoped<IStoreService, StoreService>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+
 
 var app = builder.Build();
 app.MapControllers();
