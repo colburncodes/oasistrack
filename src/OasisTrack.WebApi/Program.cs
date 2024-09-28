@@ -33,11 +33,13 @@ builder.Services.AddSwaggerGen(doc =>
 });
 
 // Register the repository
-builder.Services.AddScoped<IStoreRepository, StoreRepository>();
 builder.Services.AddScoped<IRouteRepository, RouteRepository>();
-    
+builder.Services.AddScoped<IStoreRepository, StoreRepository>();
+   
 // Register the service
+builder.Services.AddScoped<IRouteService, RouteService>();
 builder.Services.AddScoped<IStoreService, StoreService>();
+
 
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
