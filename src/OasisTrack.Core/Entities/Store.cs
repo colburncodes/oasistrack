@@ -11,7 +11,7 @@ public class Store
     public string PhoneNumber { get; set; }
     public string ManagerName { get; set; }
     public bool IsActive { get; set; }
-    public int RouteId { get; set; }
+    public int? RouteId { get; set; }
     public Route Route { get; set; }
     public List<Item> Items { get; set; }
     public SalesAgreement SalesAgreement { get; set; }
