@@ -34,6 +34,7 @@ builder.Services.AddSwaggerGen(doc =>
 
 // Register the repository
 builder.Services.AddScoped<IStoreRepository, StoreRepository>();
+builder.Services.AddScoped<IRouteRepository, RouteRepository>();
     
 // Register the service
 builder.Services.AddScoped<IStoreService, StoreService>();
